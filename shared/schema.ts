@@ -119,6 +119,50 @@ export const reports = pgTable("reports", {
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 
+// Games for skill building and education
+export const games = pgTable("games", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  name: text("name").notNull().unique(), // 'math', 'muldwarka', 'panadar', 'chara', 'damli'
+  displayName: text("display_name").notNull(),
+  description: text("description").notNull(),
+  category: text("category").notNull(), // 'educational', 'health', 'cultural'
+  difficulty: text("difficulty").notNull().default('beginner'), // 'beginner', 'intermediate', 'advanced'
+  instructions: text("instructions").notNull(),
+  gameData: jsonb("game_data"), // Game-specific configuration
+  isActive: boolean("is_active").default(true),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+// User game progress tracking
+export const gameProgress = pgTable("game_progress", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  userId: varchar("user_id").references(() => users.id).notNull(),
+  gameId: varchar("game_id").references(() => games.id).notNull(),
+  level: integer("level").default(1),
+  score: integer("score").default(0),
+  highScore: integer("high_score").default(0),
+  timesPlayed: integer("times_played").default(0),
+  totalTimeSpent: integer("total_time_spent").default(0), // in seconds
+  lastPlayedAt: timestamp("last_played_at"),
+  achievements: jsonb("achievements"), // Array of achievement IDs
+  progressData: jsonb("progress_data"), // Game-specific progress
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+});
+
+// Game sessions for detailed tracking
+export const gameSessions = pgTable("game_sessions", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  userId: varchar("user_id").references(() => users.id).notNull(),
+  gameId: varchar("game_id").references(() => games.id).notNull(),
+  score: integer("score").notNull(),
+  level: integer("level").notNull(),
+  duration: integer("duration").notNull(), // in seconds
+  completed: boolean("completed").default(false),
+  sessionData: jsonb("session_data"), // Game-specific session data
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
 // Relations
 export const familiesRelations = relations(families, ({ many, one }) => ({
   members: many(familyMembers),
@@ -178,6 +222,33 @@ export const reportsRelations = relations(reports, ({ one }) => ({
   }),
 }));
 
+export const gamesRelations = relations(games, ({ many }) => ({
+  gameProgress: many(gameProgress),
+  gameSessions: many(gameSessions),
+}));
+
+export const gameProgressRelations = relations(gameProgress, ({ one }) => ({
+  user: one(users, {
+    fields: [gameProgress.userId],
+    references: [users.id],
+  }),
+  game: one(games, {
+    fields: [gameProgress.gameId],
+    references: [games.id],
+  }),
+}));
+
+export const gameSessionsRelations = relations(gameSessions, ({ one }) => ({
+  user: one(users, {
+    fields: [gameSessions.userId],
+    references: [users.id],
+  }),
+  game: one(games, {
+    fields: [gameSessions.gameId],
+    references: [games.id],
+  }),
+}));
+
 // Insert schemas
 export const insertUserSchema = createInsertSchema(users).pick({
   username: true,
@@ -223,6 +294,22 @@ export const insertMedicalCheckupSchema = createInsertSchema(medicalCheckups).om
   createdAt: true,
 });
 
+export const insertGameSchema = createInsertSchema(games).omit({
+  id: true,
+  createdAt: true,
+});
+
+export const insertGameProgressSchema = createInsertSchema(gameProgress).omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+});
+
+export const insertGameSessionSchema = createInsertSchema(gameSessions).omit({
+  id: true,
+  createdAt: true,
+});
+
 // Types
 export type InsertUser = z.infer<typeof insertUserSchema>;
 export type User = typeof users.$inferSelect;
@@ -239,3 +326,9 @@ export type VaccinationRecord = typeof vaccinationRecords.$inferSelect;
 export type InsertMedicalCheckup = z.infer<typeof insertMedicalCheckupSchema>;
 export type MedicalCheckup = typeof medicalCheckups.$inferSelect;
 export type Report = typeof reports.$inferSelect;
+export type InsertGame = z.infer<typeof insertGameSchema>;
+export type Game = typeof games.$inferSelect;
+export type InsertGameProgress = z.infer<typeof insertGameProgressSchema>;
+export type GameProgress = typeof gameProgress.$inferSelect;
+export type InsertGameSession = z.infer<typeof insertGameSessionSchema>;
+export type GameSession = typeof gameSessions.$inferSelect;
