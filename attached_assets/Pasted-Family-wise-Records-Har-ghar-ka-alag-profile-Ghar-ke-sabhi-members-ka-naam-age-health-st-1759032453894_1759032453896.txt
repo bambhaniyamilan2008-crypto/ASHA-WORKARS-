@@ -1,0 +1,177 @@
+Family-wise Records 🏠
+
+Har ghar ka alag profile.
+
+Ghar ke sabhi members ka naam, age, health status, ID proof.
+
+QR code / ID number assign karna.
+
+Health Categories 📂
+
+Pregnant women list.
+
+0-5 saal ke bacche (vaccination tracking).
+
+TB / Diabetes / Hypertension patients.
+
+Senior citizens monitoring.
+
+Village Dashboard 📊
+
+Ek hi screen par “Kitni pregnancies”, “Kitne bacche vaccinated”, “Kitne TB patients” ka summary view.
+
+Color-coded alerts (red = pending, green = complete).
+
+Search & Filter 🔍
+
+Name, age, ward number ya disease ke basis par search.
+
+Filter for “Only Pregnant”, “Only Child Below 5 Years” etc.
+
+Map Integration (Optional) 🗺️
+
+Har ghar ka location map par show ho.
+
+Asha worker ko turant ghar identify karne me help mile.
+
+Offline + Sync Mode 📶
+
+Internet na ho to bhi data save ho.
+
+Net aate hi auto sync with main database.
+
+Data Security 🔐
+
+Password / PIN login.
+
+Only authorized ASHA + supervisor access.
+
+Reports Export 📑
+
+Monthly report auto-generate in PDF / Excel.
+
+Supervisor aur PHC ko bhejne me asaan.
+Patient Record & Tracking App
+
+Ghar ghar survey ka record maintain karne ke liye.
+
+Pregnancy, vaccination, TB, malaria, etc. ka patient-wise data.
+
+Offline mode + auto sync when internet available.
+
+Health Reminder & Notification App
+
+Vaccination due date reminder.
+
+Pregnant women ke ANC (Antenatal Check-up) reminders.
+
+Medicine dosage notifications (like TB/Leprosy).
+Emergency Help & Referral App
+
+Direct call button for ambulance (108 / 102).
+
+Nearest hospital/PHC location with map.
+
+Referral slip generate karne ka option
+Risk Alert App 🚨
+
+Agar koi pregnant woman high-risk hai (BP, anemia, previous complications), to automatic red alert aajaye.
+
+Referral hospital ke contact details ke saath.
+Village Dashboard 📊
+
+Ek hi screen par “Kitni pregnancies”, “Kitne bacche vaccinated”, “Kitne TB patients” ka summary view.
+
+Color-coded alerts (red = pending, green = complete).
+
+Search & Filter 🔍
+
+Name, age, ward number ya disease ke basis par search.
+
+Filter for “Only Pregnant”, “Only Child Below 5 Years” etc.
+Data Security 🔐
+
+Password / PIN login.
+
+Only authorized ASHA + supervisor access.
+
+Reports Export 📑
+
+Monthly report auto-generate in PDF / Excel.
+
+Supervisor aur PHC ko bhejne me asaan.
+Growth Chart & Graphs 📊
+
+Children ke liye WHO-based growth chart.
+
+Pregnant women ke weight gain graph.
+Offline First Design 📶
+
+Internet na hone par bhi data local phone me save ho.
+
+Net aate hi auto sync.
+Role-Based Access 👩‍⚕️👨‍💼
+
+ASHA Worker → Data entry & updates.
+
+Supervisor (ANM/PHC) → Reports & verification.
+
+Doctor → High-risk patient alerts.
+Language Toggle Button 🌐
+
+App ke top ya settings me toggle button.
+
+User select kare: Local language / Hindi / English/gujrati.
+Language Toggle Button 🌐
+
+App ke top ya settings me toggle button.
+
+User select kare: Local language / Hindi / English/ gujrati.
+Main Navigation Sections (Grid Buttons)
+Icon	Section	Purpose
+🏠 Users	All Families	Ghar-wise data access
+👩‍🍼 Home	Pregnancy Care	ANC, checkups, risk alerts
+👶 Baby	Child Care	Vaccination, growth tracking
+🩺 Activity	TB / Diseases	Patient tracking & medicine
+📑 FileText	Reports	Monthly / weekly reports
+🗺️ MapPin	Village Map	Ghar locations & alerts
+Quick Actions / Buttons (Below Grid)
+
++ Add New Family Record
+
++ Add New Patient / Child / Pregnant Woman
+
+Scan QR Code → Turant family record kholne ke liye
+Summary Cards Animation
+
+Cards (Pregnant Women, Children, TB Patients) fade-in + slide-up on page load.
+
+Count animation: number 0 → actual count smoothly increase.
+
+2. Navigation Grid Buttons
+
+Buttons bounce or scale slightly on hover / tap.
+
+On page load: staggered animation, ek ek karke show ho.
+
+3. Alert Strip / Notifications
+
+Alerts scrolling marquee style (left-right) or slide-down drop-in.
+
+High-risk alerts flash subtly (soft red pulse).
+
+4. Quick Action Buttons
+
++ Add New Record button pulse gently to attract attention.
+
+On tap → ripple effect or scale animation.
+
+5. Language Toggle & Profile Icon
+
+Small fade-in + rotation / scale effect on page load.
+
+6. Optional Lottie Animation 🎨
+
+Pregnancy / child / health icon animation (looping).
+
+Lightweight, visually attractive, gaam ke dashboard feel de.
